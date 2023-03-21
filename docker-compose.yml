@@ -14,13 +14,13 @@ services:
     stdin_open: true
   app:
     build:
-      context: ./app
+      context: ./api
       dockerfile: containers/development/Dockerfile
     command: /bin/bash -c "rm -f /app/tmp/pids/server.pid; bundle install -j3; bin/rails s -p 3000 -b '0.0.0.0'"
     ports:
       - '3000:3000'
     volumes:
-      - ./app:/app
+      - ./api:/app
     environment:
       CORS_ALLOWED_ORIGINS: '.*'
     depends_on:
