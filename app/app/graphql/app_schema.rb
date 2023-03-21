@@ -28,13 +28,16 @@ class AppSchema < GraphQL::Schema
 
   # Return a string UUID for `object`
   def self.id_from_object(object, type_definition, query_ctx)
-    # For example, use Rails' GlobalID library (https://github.com/rails/globalid):
-    object.to_gid_param
+    "#{object.class.name}_#{object.id}"
   end
 
   # Given a string UUID, find the object
   def self.object_from_id(global_id, query_ctx)
-    # For example, use Rails' GlobalID library (https://github.com/rails/globalid):
-    GlobalID.find(global_id)
+    raise ActiveRecord::RecordNotFound if global_id.blank?
+
+    class_name, id = global_id.split('_')
+    raise ActiveRecord::RecordNotFound if class_name.blank? || id.blank?
+
+    Object.const_get(class_name).find(id)
   end
 end

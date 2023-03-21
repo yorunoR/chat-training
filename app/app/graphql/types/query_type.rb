@@ -6,6 +6,7 @@ module Types
 
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
+    field :users, resolver: Queries::Resolvers::Users
 
     # TODO: remove me
     field :test_field, String, null: false,
