@@ -1,8 +1,8 @@
-// import { authExchange } from '@urql/exchange-auth'
+import { authExchange } from '@urql/exchange-auth'
 import { createClient, dedupExchange, cacheExchange, fetchExchange } from '@urql/vue'
 import type { Client } from '@urql/vue'
 
-// import { authConfig } from '@/services/authConfig'
+import { authConfig } from '@/services/authConfig'
 
 const API_URL = import.meta.env.VITE_APP_API_URL as string
 
@@ -12,7 +12,7 @@ export function makeClient(): Client {
     exchanges: [
       dedupExchange,
       cacheExchange,
-      // authExchange(authConfig),
+      authExchange(authConfig),
       fetchExchange
     ]
   })
