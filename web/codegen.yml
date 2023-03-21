@@ -1,0 +1,12 @@
+overwrite: true
+schema: 'http://app:3000/graphql'
+documents: 'src/graphql/**/*.ts'
+generates:
+  src/auto_generated/graphql.ts:
+    config:
+      scalars:
+        DateTime: string
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-vue-urql
