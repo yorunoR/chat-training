@@ -70,3 +70,6 @@ end
 gem 'devise'
 gem 'rails_admin'
 gem "sassc-rails"
+# GraphQL
+gem 'graphql'
+gem 'graphiql-rails'
