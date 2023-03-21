@@ -631,6 +631,21 @@
     "@typescript-eslint/types" "5.56.0"
     eslint-visitor-keys "^3.3.0"
 
+"@urql/core@^3.2.0":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@urql/core/-/core-3.2.2.tgz#2a44015b536d72981822f715c96393d8e0ddc576"
+  integrity sha512-i046Cz8cZ4xIzGMTyHZrbdgzcFMcKD7+yhCAH5FwWBRjcKrc+RjEOuR9X5AMuBvr8c6IAaE92xAqa4wmlGfWTQ==
+  dependencies:
+    wonka "^6.1.2"
+
+"@urql/vue@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@urql/vue/-/vue-1.0.5.tgz#f3ba91c81ac97476fa001abd366999ac4f304122"
+  integrity sha512-RiXiINAr/tBJTIRcbA+TPCwRvK/z3NJy7+NOQvXHV/c9nCDrmUgu7HqdVMtAmlh5jUIw3HR8nI8IrRUoJqchHw==
+  dependencies:
+    "@urql/core" "^3.2.0"
+    wonka "^6.0.0"
+
 "@vitejs/plugin-vue-jsx@^3.0.0":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue-jsx/-/plugin-vue-jsx-3.0.1.tgz#4c088ce445e34ae27e78a66e6dbf2cc2e85f827d"
@@ -1801,6 +1816,11 @@ grapheme-splitter@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz#9cf3a665c6247479896834af35cf1dbb4400767e"
   integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
+
+graphql@^16.6.0:
+  version "16.6.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.6.0.tgz#c2dcffa4649db149f6282af726c8c83f1c7c5fdb"
+  integrity sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw==
 
 has-bigints@^1.0.1, has-bigints@^1.0.2:
   version "1.0.2"
@@ -3332,6 +3352,11 @@ why-is-node-running@^2.2.2:
   dependencies:
     siginfo "^2.0.0"
     stackback "0.0.2"
+
+wonka@^6.0.0, wonka@^6.1.2:
+  version "6.2.5"
+  resolved "https://registry.yarnpkg.com/wonka/-/wonka-6.2.5.tgz#26e54a6827b96a6164b845106f4d925ede4089bb"
+  integrity sha512-adhGYKm5xWIZYXRkzEqHbRbRl2gXHqOudjQJMXpRgSyboFmaKOjGm3RIThBk4tZdiZx1DXuKK0H9wKBgXHhzZg==
 
 word-wrap@^1.2.3, word-wrap@~1.2.3:
   version "1.2.3"
