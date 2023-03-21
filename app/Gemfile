@@ -66,3 +66,5 @@ group :development do
   gem 'annotate'
 end
 
+# RailsAdmin
+gem 'devise'
