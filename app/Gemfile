@@ -73,3 +73,5 @@ gem "sassc-rails"
 # GraphQL
 gem 'graphql'
 gem 'graphiql-rails'
+# Permit cors
+gem 'rack-cors'
