@@ -1,25 +1,30 @@
 <template>
   <main style="max-width: 768px; margin: auto">
     <h2>History</h2>
-    <h2>Question</h2>
-    <section class="text-left mt-6">
+    <section v-if="data" class="text-left mt-6">
       <div
-        v-for="index in [1, 2, 3, 4, 5, 6]"
+        v-for="answerHistory in data.currentUser.answerHistories"
         class="border-solid border-1 border-300 p-2"
-        :key="index"
+        :key="answerHistory.id"
       >
-        <div class="my-2 text-xs">保存日時: 2023-03-04 12:04:33</div>
+        <div class="my-2 text-xs">保存日時: {{ answerHistory.createdAt }}</div>
         <div class="my-2">
           <b>質問：</b>
-          <span>明日は晴れますか？</span>
+          <span>{{ answerHistory.question }}</span>
         </div>
         <div class="my-2">
           <b>回答：</b>
-          <span>明日は雨です</span>
+          <span>{{ answerHistory.answer }}</span>
         </div>
       </div>
     </section>
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useCurrentUserQuery } from '@/auto_generated/graphql'
+
+const { _fetching, _error, data } = useCurrentUserQuery({
+  context: { additionalTypenames: ['AnswerHistory'] }
+})
+</script>

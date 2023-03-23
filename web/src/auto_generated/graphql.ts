@@ -16,6 +16,16 @@ export type Scalars = {
   ISO8601DateTime: any
 }
 
+export type AnswerHistory = {
+  __typename?: 'AnswerHistory'
+  answer: Scalars['String']
+  createdAt: Scalars['ISO8601DateTime']
+  id: Scalars['ID']
+  question: Scalars['String']
+  updatedAt: Scalars['ISO8601DateTime']
+  userId: Scalars['Int']
+}
+
 export type Mutation = {
   __typename?: 'Mutation'
   /** サインイン */
@@ -28,6 +38,8 @@ export type MutationSigninUserArgs = {
 
 export type Query = {
   __typename?: 'Query'
+  /** The currently logged in user */
+  currentUser?: Maybe<User>
   /** Userの一覧取得 */
   ping: Scalars['String']
 }
@@ -49,6 +61,8 @@ export type SigninUserPayload = {
 export type User = {
   __typename?: 'User'
   activated: Scalars['Boolean']
+  /** 回答履歴一覧 */
+  answerHistories: Array<AnswerHistory>
   createdAt: Scalars['ISO8601DateTime']
   email?: Maybe<Scalars['String']>
   id: Scalars['ID']
@@ -64,6 +78,25 @@ export type SigninUserMutation = {
   signinUser?: {
     __typename?: 'SigninUserPayload'
     user: { __typename?: 'User'; uid?: string | null }
+  } | null
+}
+
+export type CurrentUserQueryVariables = Exact<{ [key: string]: never }>
+
+export type CurrentUserQuery = {
+  __typename?: 'Query'
+  currentUser?: {
+    __typename?: 'User'
+    id: string
+    name?: string | null
+    email?: string | null
+    answerHistories: Array<{
+      __typename?: 'AnswerHistory'
+      id: string
+      question: string
+      answer: string
+      createdAt: any
+    }>
   } | null
 }
 
@@ -83,6 +116,27 @@ export const SigninUserDocument = gql`
 
 export function useSigninUserMutation() {
   return Urql.useMutation<SigninUserMutation, SigninUserMutationVariables>(SigninUserDocument)
+}
+export const CurrentUserDocument = gql`
+  query CurrentUser {
+    currentUser {
+      id
+      name
+      email
+      answerHistories {
+        id
+        question
+        answer
+        createdAt
+      }
+    }
+  }
+`
+
+export function useCurrentUserQuery(
+  options: Omit<Urql.UseQueryArgs<never, CurrentUserQueryVariables>, 'query'> = {}
+) {
+  return Urql.useQuery<CurrentUserQuery>({ query: CurrentUserDocument, ...options })
 }
 export const PingDocument = gql`
   query Ping {
