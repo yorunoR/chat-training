@@ -7,5 +7,10 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
     field :ping, resolver: Queries::Ping
+
+    field :current_user, Types::UserType, null: true, description: 'The currently logged in user'
+    def current_user
+      context[:current_user]
+    end
   end
 end
