@@ -18,4 +18,12 @@ body {
   color: #2c3e50;
   height: 100%;
 }
+
+a {
+  color: #2c3e50;
+}
+
+a.router-link-exact-active {
+  color: #42b983;
+}
 </style>

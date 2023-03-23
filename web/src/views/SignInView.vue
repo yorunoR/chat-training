@@ -1,5 +1,6 @@
 <template>
   <main class="h-full">
+    <h1 style="margin: 100px">AI Chat bot</h1>
     <Button class="top-50" @click="signIn"> Google Sign in </Button>
   </main>
 </template>
@@ -24,7 +25,7 @@ const signIn = async () => {
       detail: result.error.message
     })
   } else {
-    router.push({ name: 'ping' })
+    router.push({ name: 'question' })
   }
 }
 </script>
