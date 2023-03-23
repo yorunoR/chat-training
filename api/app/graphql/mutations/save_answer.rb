@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mutations
   class SaveAnswer < Mutations::Base
     description '回答保存'
@@ -13,12 +15,12 @@ module Mutations
       answer_history =
         current_user.answer_histories.create!(
           user: current_user,
-          question: question,
-          answer: answer
+          question:,
+          answer:
         )
 
       {
-        answer_history: answer_history
+        answer_history:
       }
     end
   end

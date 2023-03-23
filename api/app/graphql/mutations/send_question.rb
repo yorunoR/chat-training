@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mutations
   class SendQuestion < Mutations::Base
     description '質問送信'

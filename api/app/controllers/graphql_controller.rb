@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GraphqlController < GraphqlBaseController
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
@@ -17,16 +19,17 @@ class GraphqlController < GraphqlBaseController
       end
 
     context = {
-      current_user: current_user,
-      uid: uid,
-      email: email,
-      name: name,
+      current_user:,
+      uid:,
+      email:,
+      name:
     }
 
-    result = AppSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    result = AppSchema.execute(query, variables:, context:, operation_name:)
     render json: result
   rescue StandardError => e
     raise e unless Rails.env.development?
+
     handle_error_in_development(e)
   end
 
@@ -52,11 +55,11 @@ class GraphqlController < GraphqlBaseController
     end
   end
 
-  def handle_error_in_development(e)
-    logger.error e.message
-    logger.error e.backtrace.join("\n")
+  def handle_error_in_development(err)
+    logger.error err.message
+    logger.error err.backtrace.join("\n")
 
-    render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
+    render json: { errors: [{ message: err.message, backtrace: err.backtrace }], data: {} }, status: 500
   end
 
   def auth_decode!
@@ -75,8 +78,8 @@ class GraphqlController < GraphqlBaseController
   def current_user
     return @current_user if @current_user.present?
 
-    uid, _, _ = auth_decode!
+    uid, = auth_decode!
 
-    @current_user = User.find_by(uid: uid)
+    @current_user = User.find_by(uid:)
   end
 end
