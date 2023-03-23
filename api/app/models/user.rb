@@ -13,4 +13,6 @@
 class User < ApplicationRecord
   validates :email, presence: true
   validates :uid, presence: true
+
+  has_many :answer_histories, dependent: :destroy
 end

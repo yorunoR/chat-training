@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_21_125321) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_23_102151) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_125321) do
     t.index ["email"], name: "index_admin_users_on_email", unique: true
   end
 
+  create_table "answer_histories", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "question", null: false
+    t.text "answer", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_answer_histories_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.boolean "activated", null: false
     t.string "email", null: false
@@ -32,4 +41,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_125321) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "answer_histories", "users"
 end
