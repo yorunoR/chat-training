@@ -15,6 +15,7 @@ import Chip from 'primevue/chip'
 import InputText from 'primevue/inputtext'
 import RadioButton from 'primevue/radiobutton'
 import Sidebar from 'primevue/sidebar'
+import Textarea from 'primevue/textarea'
 import Toast from 'primevue/toast'
 
 const app = createApp(App)
@@ -29,5 +30,6 @@ app
   .component('InputText', InputText)
   .component('RadioButton', RadioButton)
   .component('Sidebar', Sidebar)
+  .component('Textarea', Textarea)
   .component('Toast', Toast)
   .mount('#app')
