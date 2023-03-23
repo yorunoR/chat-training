@@ -4,11 +4,13 @@
 #
 #  id         :bigint           not null, primary key
 #  activated  :boolean          not null
-#  email      :string
+#  email      :string           not null
 #  name       :string
-#  uid        :string
+#  uid        :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
+  validates :email, presence: true
+  validates :uid, presence: true
 end
