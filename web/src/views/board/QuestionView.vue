@@ -5,33 +5,72 @@
       <div class="text-left mt-6">
         <p><b>質問を入力してください</b></p>
       </div>
-      <Textarea class="w-full p-3" />
-      <Button class="w-full mt-3" label="Submit" />
+      <Textarea v-model="question" class="w-full p-3" :disabled="answer != null" />
+      <Button
+        class="w-full mt-3"
+        label="Submit"
+        :disabled="question === '' || answer != null"
+        @click="clickSendQuestion"
+      />
     </section>
     <hr class="my-5" />
-    <section class="text-left">
+    <section v-if="answer != null" class="text-left">
       <div>
         <p><b>回答</b></p>
       </div>
       <p class="border-solid border-1 border-400 p-3">
-        回答です1
-        <br />
-        回答です2
-        <br />
-        回答です3
-        <br />
-        回答です4
-        <br />
-        回答です5
-        <br />
-        回答です6
-        <br />
-        回答です7
+        {{ answer }}
       </p>
-      <Button class="w-full mt-3" label="Save and Clear" />
-      <Button class="w-full mt-2" label="Clear" />
+      <Button class="w-full mt-3" label="Save and Clear" @click="clickSaveAnswer" />
+      <Button class="w-full mt-2" label="Clear" @click="clear" />
     </section>
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useToast } from 'primevue/usetoast'
+import { ref } from 'vue'
+import { useSendQuestionMutation } from '@/auto_generated/graphql'
+import { useSaveAnswerMutation } from '@/auto_generated/graphql'
+
+const toast = useToast()
+
+const question = ref('')
+const answer = ref(null)
+
+const { executeMutation: sendQuestion } = useSendQuestionMutation()
+const { executeMutation: saveAnswer } = useSaveAnswerMutation()
+
+const clickSendQuestion = async () => {
+  const res = await sendQuestion({
+    question: question.value
+  })
+  answer.value = res?.data?.sendQuestion?.answer
+}
+
+const clickSaveAnswer = async () => {
+  const res = await saveAnswer({
+    question: question.value,
+    answer: answer.value
+  })
+  if (res.error) {
+    toast.add({
+      severity: 'error',
+      summary: 'Save Answer',
+      detail: res.error.message
+    })
+  } else {
+    toast.add({
+      severity: 'success',
+      summary: 'Save Answer',
+      detail: 'History のページで確認できます'
+    })
+  }
+  clear()
+}
+
+const clear = () => {
+  question.value = ''
+  answer.value = null
+}
+</script>
