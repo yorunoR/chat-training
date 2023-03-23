@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Queries
-  class Base < GraphQL::Schema::Resolver
-    def authorized?
+module Mutations
+  class Base < Mutations::BaseMutation
+    def authorized?(_args)
       raise GraphQL::ExecutionError, 'login required!!' unless context[:current_user]
 
       true
