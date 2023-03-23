@@ -9,11 +9,6 @@ const API_URL = import.meta.env.VITE_APP_API_URL as string
 export function makeClient(): Client {
   return createClient({
     url: `${API_URL}/graphql`,
-    exchanges: [
-      dedupExchange,
-      cacheExchange,
-      authExchange(authConfig),
-      fetchExchange
-    ]
+    exchanges: [dedupExchange, cacheExchange, authExchange(authConfig), fetchExchange]
   })
 }
