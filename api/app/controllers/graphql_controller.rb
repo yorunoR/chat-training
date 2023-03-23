@@ -8,10 +8,21 @@ class GraphqlController < GraphqlBaseController
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+
+    uid, email, name =
+      if current_user.blank?
+        auth_decode!
+      else
+        [current_user.uid, current_user.email, current_user.name]
+      end
+
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user,
+      uid: uid,
+      email: email,
+      name: name,
     }
+
     result = AppSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e
@@ -46,5 +57,26 @@ class GraphqlController < GraphqlBaseController
     logger.error e.backtrace.join("\n")
 
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
+  end
+
+  def auth_decode!
+    token = request.headers['Authorization']&.gsub(/^Bearer /, '')
+    return nil if token.blank?
+
+    payload = FirebaseAuth.new(token).validate!
+
+    [payload['user_id'], payload['email'], payload['name']]
+  rescue StandardError => e
+    Rails.logger.error e.message
+
+    nil
+  end
+
+  def current_user
+    return @current_user if @current_user.present?
+
+    uid, _, _ = auth_decode!
+
+    @current_user = User.find_by(uid: uid)
   end
 end

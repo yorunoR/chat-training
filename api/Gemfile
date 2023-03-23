@@ -64,6 +64,8 @@ group :development do
   # gem "spring"
 
   gem 'annotate'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 # RailsAdmin
@@ -75,3 +77,7 @@ gem 'graphql'
 gem 'graphiql-rails'
 # Permit cors
 gem 'rack-cors'
+# dotenv
+gem 'dotenv-rails'
+# jwt
+gem 'jwt'
