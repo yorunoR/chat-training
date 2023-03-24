@@ -24,7 +24,7 @@
       <Button class="w-full mt-3" label="Save and Clear" @click="clickSaveAnswer" />
       <Button class="w-full mt-2" label="Clear" @click="clear" />
     </section>
-    <Dialog v-model:visible="visible" modal :closable="false" :style="{ width: '30vw' }">
+    <Dialog v-model:visible="visible" modal :closable="false" :style="{ width: '60vw' }">
       <div class="text-center pb-3">
         <b>問い合わせ中です</b>
       </div>
