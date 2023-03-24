@@ -52,6 +52,13 @@ const clickSendQuestion = async () => {
   const res = await sendQuestion({
     question: question.value
   })
+  if (res.error) {
+    toast.add({
+      severity: 'error',
+      summary: 'Send Question',
+      detail: res.error.message
+    })
+  }
   visible.value = false
   answer.value = res?.data?.sendQuestion?.answer ?? ''
 }
@@ -73,8 +80,8 @@ const clickSaveAnswer = async () => {
       summary: 'Save Answer',
       detail: 'History のページで確認できます'
     })
+    clear()
   }
-  clear()
 }
 
 const clear = () => {
