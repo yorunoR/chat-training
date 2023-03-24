@@ -4,17 +4,21 @@
     <section v-if="data" class="text-left mt-6">
       <div
         v-for="answerHistory in data.currentUser.answerHistories"
-        class="border-solid border-1 border-300 p-2"
+        class="border-solid border-1 border-700 p-3 mt-4"
         :key="answerHistory.id"
       >
-        <div class="my-2 text-xs">保存日時: {{ answerHistory.createdAt }}</div>
-        <div class="my-2">
-          <b>質問：</b>
-          <span>{{ answerHistory.question }}</span>
+        <div class="text-xs">保存日時: {{ answerHistory.createdAt }}</div>
+        <hr />
+        <div class="my-3">
+          <b>■ 質問</b>
+          <br />
+          <span class="mt-1">{{ answerHistory.question }}</span>
         </div>
-        <div class="my-2">
-          <b>回答：</b>
-          <span>{{ answerHistory.answer }}</span>
+        <hr />
+        <div class="my-3" style="white-space: pre-wrap">
+          <b>■ 回答</b>
+          <br />
+          <span class="mt-1">{{ answerHistory.answer }}</span>
         </div>
       </div>
     </section>

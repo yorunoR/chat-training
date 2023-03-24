@@ -8,7 +8,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/ping'
+      redirect: '/board/question'
     },
     {
       path: '/',
@@ -56,6 +56,10 @@ const router = createRouter({
             await import(/* webpackChunkName: "history" */ '@/views/board/HistoryView.vue')
         }
       ]
+    },
+    {
+      path: '/:catchAll(.*)',
+      redirect: '/board/question'
     }
   ]
 })
