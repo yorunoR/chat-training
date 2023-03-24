@@ -51,7 +51,7 @@ export type MutationSigninUserArgs = {
 export type Query = {
   __typename?: 'Query'
   /** The currently logged in user */
-  currentUser?: Maybe<User>
+  currentUser: User
   /** Userの一覧取得 */
   ping: Scalars['String']
 }
@@ -150,7 +150,7 @@ export type CurrentUserQueryVariables = Exact<{ [key: string]: never }>
 
 export type CurrentUserQuery = {
   __typename?: 'Query'
-  currentUser?: {
+  currentUser: {
     __typename?: 'User'
     id: string
     name?: string | null
@@ -162,7 +162,7 @@ export type CurrentUserQuery = {
       answer: string
       createdAt: any
     }>
-  } | null
+  }
 }
 
 export type PingQueryVariables = Exact<{ [key: string]: never }>
