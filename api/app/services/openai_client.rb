@@ -33,4 +33,13 @@ class OpenaiClient
       }
     end
   end
+
+  def embeddings(input)
+    @client.embeddings(
+      parameters: {
+        model: @model,
+        input:
+      }
+    )
+  end
 end
