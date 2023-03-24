@@ -12,6 +12,8 @@ module Types
 
     field :current_user, Types::UserType, null: true, description: 'The currently logged in user'
     def current_user
+      raise GraphQL::ExecutionError, 'login required!!' unless context[:current_user]
+
       context[:current_user]
     end
   end
