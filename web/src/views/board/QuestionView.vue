@@ -18,12 +18,17 @@
       <div>
         <p><b>回答</b></p>
       </div>
-      <p class="border-solid border-1 border-400 p-3">
+      <p class="border-solid border-1 border-400 p-3" style="white-space: pre-wrap">
         {{ answer }}
       </p>
       <Button class="w-full mt-3" label="Save and Clear" @click="clickSaveAnswer" />
       <Button class="w-full mt-2" label="Clear" @click="clear" />
     </section>
+    <Dialog v-model:visible="visible" modal :closable="false" :style="{ width: '30vw' }">
+      <div class="text-center pb-3">
+        <b>問い合わせ中です</b>
+      </div>
+    </Dialog>
   </main>
 </template>
 
@@ -37,14 +42,17 @@ const toast = useToast()
 
 const question = ref('')
 const answer = ref(null)
+const visible = ref(false)
 
 const { executeMutation: sendQuestion } = useSendQuestionMutation()
 const { executeMutation: saveAnswer } = useSaveAnswerMutation()
 
 const clickSendQuestion = async () => {
+  visible.value = true
   const res = await sendQuestion({
     question: question.value
   })
+  visible.value = false
   answer.value = res?.data?.sendQuestion?.answer
 }
 

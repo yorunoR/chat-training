@@ -12,6 +12,7 @@ import 'primevue/resources/primevue.css'
 import 'primevue/resources/themes/saga-blue/theme.css'
 import Button from 'primevue/button'
 import Chip from 'primevue/chip'
+import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
 import RadioButton from 'primevue/radiobutton'
 import Sidebar from 'primevue/sidebar'
@@ -27,6 +28,7 @@ app
   .use(ToastService)
   .component('Button', Button)
   .component('Chip', Chip)
+  .component('Dialog', Dialog)
   .component('InputText', InputText)
   .component('RadioButton', RadioButton)
   .component('Sidebar', Sidebar)
