@@ -25,3 +25,8 @@ http://localhost:3000/admin/ で管理画面が開けます。
 AdminUser.create!(email: 'your_email@example.com', password: 'your_password')
 ```
 ※ 終了するときは `exit` 入力
+
+
+## 本番リリースについて
+フロントエンドを build する時に、graphql-codegen で自動生成されたファイルが、型不一致でエラーになります。  
+ツールの不具合だと思いますが、当面手動で `// @ts-ignore: TS2345` を追加し、回避してください。

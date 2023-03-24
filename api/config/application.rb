@@ -35,5 +35,8 @@ module App
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # TODO: sassc-rails の不具合回避のため。
+    config.assets.css_compressor = nil
   end
 end
