@@ -1,3 +1,4 @@
+import swal from 'sweetalert'
 import firebase from '@/services/firebase'
 
 export const authConfig = async (utils) => {
@@ -19,7 +20,11 @@ export const authConfig = async (utils) => {
         Authorization: `Bearer ${token}`
       })
     },
-    didAuthError(_error) {
+    didAuthError(error) {
+      if (error.graphQLErrors.some((e) => e.message === 'login required!!')) {
+        swal({ title: 'Error', text: 'ログインしてください' }).catch((err) => console.error(err))
+      }
+
       return false
     }
   }
