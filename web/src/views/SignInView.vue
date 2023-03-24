@@ -17,7 +17,7 @@ const { executeMutation: signinUser } = useSigninUserMutation()
 
 const signIn = async () => {
   await firebase.signinWithGoogle()
-  const result = await signinUser()
+  const result = await signinUser({})
   if (result.error) {
     toast.add({
       severity: 'error',

@@ -5,16 +5,16 @@
       <div class="text-left mt-6">
         <p><b>質問を入力してください</b></p>
       </div>
-      <Textarea v-model="question" class="w-full p-3" :disabled="answer != null" />
+      <Textarea v-model="question" class="w-full p-3" :disabled="answer != ''" />
       <Button
         class="w-full mt-3"
         label="Submit"
-        :disabled="question === '' || answer != null"
+        :disabled="question === '' || answer != ''"
         @click="clickSendQuestion"
       />
     </section>
     <hr class="my-5" />
-    <section v-if="answer != null" class="text-left">
+    <section v-if="answer != ''" class="text-left">
       <div>
         <p><b>回答</b></p>
       </div>
@@ -41,7 +41,7 @@ import { useSaveAnswerMutation } from '@/auto_generated/graphql'
 const toast = useToast()
 
 const question = ref('')
-const answer = ref(null)
+const answer = ref('')
 const visible = ref(false)
 
 const { executeMutation: sendQuestion } = useSendQuestionMutation()
@@ -53,7 +53,7 @@ const clickSendQuestion = async () => {
     question: question.value
   })
   visible.value = false
-  answer.value = res?.data?.sendQuestion?.answer
+  answer.value = res?.data?.sendQuestion?.answer ?? ''
 }
 
 const clickSaveAnswer = async () => {
@@ -79,6 +79,6 @@ const clickSaveAnswer = async () => {
 
 const clear = () => {
   question.value = ''
-  answer.value = null
+  answer.value = ''
 }
 </script>

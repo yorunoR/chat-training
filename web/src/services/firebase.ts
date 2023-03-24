@@ -37,7 +37,7 @@ getApps().length === 0
 
 const auth = getAuth()
 // const { t } = i18n.global
-function t(str) {
+function t(str: string) {
   return str
 }
 

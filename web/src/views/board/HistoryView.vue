@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { useCurrentUserQuery } from '@/auto_generated/graphql'
 
-const { _fetching, _error, data } = useCurrentUserQuery({
+const { data } = useCurrentUserQuery({
   context: { additionalTypenames: ['AnswerHistory'] }
 })
 </script>
