@@ -17,5 +17,5 @@
 <script setup lang="ts">
 import { usePingQuery } from '@/auto_generated/graphql'
 
-const { fetching, error, data } = usePingQuery()
+const { fetching, error, data } = usePingQuery({})
 </script>

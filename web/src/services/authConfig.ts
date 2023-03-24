@@ -1,7 +1,7 @@
 import swal from 'sweetalert'
 import firebase from '@/services/firebase'
 
-export const authConfig = async (utils) => {
+export const authConfig = async (utils: any) => {
   let token = await firebase.getIdToken()
 
   return {
@@ -11,7 +11,7 @@ export const authConfig = async (utils) => {
     willAuthError: () => {
       return true
     },
-    addAuthToOperation(operation) {
+    addAuthToOperation(operation: any) {
       if (token == null) {
         return operation
       }
@@ -20,8 +20,8 @@ export const authConfig = async (utils) => {
         Authorization: `Bearer ${token}`
       })
     },
-    didAuthError(error) {
-      if (error.graphQLErrors.some((e) => e.message === 'login required!!')) {
+    didAuthError(error: any) {
+      if (error.graphQLErrors.some((e: any) => e.message === 'login required!!')) {
         swal({ title: 'Error', text: 'ログインしてください' }).catch((err) => console.error(err))
       }
 
