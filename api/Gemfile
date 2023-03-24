@@ -85,3 +85,5 @@ gem 'rack-cors'
 gem 'dotenv-rails'
 # jwt
 gem 'jwt'
+# openai
+gem 'ruby-openai'
