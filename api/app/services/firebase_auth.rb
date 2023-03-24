@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/http'
 
 class FirebaseAuth
@@ -20,27 +22,23 @@ class FirebaseAuth
       verify_iss: true,
       aud: PROJECT_ID,
       verify_aud: true,
-      verify_iat: true,
+      verify_iat: true
     }
-    payload, _ = JWT.decode(@token, nil, true, options) do |header|
+    payload, = JWT.decode(@token, nil, true, options) do |header|
       cert = fetch_certificates[header['kid']]
-      if cert.present?
-        OpenSSL::X509::Certificate.new(cert).public_key
-      else
-        nil
-      end
+      OpenSSL::X509::Certificate.new(cert).public_key if cert.present?
     end
 
     # JWT.decode でチェックされない項目のチェック
-    raise InvalidTokenError.new('Invalid auth_time') unless Time.zone.at(payload['auth_time']).past?
-    raise InvalidTokenError.new('Invalid sub') if payload['sub'].empty?
+    raise InvalidTokenError, 'Invalid auth_time' unless Time.zone.at(payload['auth_time']).past?
+    raise InvalidTokenError, 'Invalid sub' if payload['sub'].empty?
 
     payload
   rescue JWT::DecodeError => e
     Rails.logger.error e.message
     Rails.logger.error e.backtrace.join("\n")
 
-    raise InvalidTokenError.new(e.message)
+    raise InvalidTokenError, e.message
   end
 
   private

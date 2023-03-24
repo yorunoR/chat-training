@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mutations
   class SendQuestion < Mutations::Base
     description '質問送信'
@@ -7,10 +9,10 @@ module Mutations
     field :answer, String, null: false
 
     def resolve(question:)
-      current_user = context[:current_user]
+      answer = OpenaiClient.new.send_question(question)
 
       {
-        answer: '回答です'
+        answer:
       }
     end
   end

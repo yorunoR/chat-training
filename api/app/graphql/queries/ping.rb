@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Queries
   class Ping < GraphQL::Schema::Resolver
     type String, null: false
-    description "Userの一覧取得"
+    description 'Userの一覧取得'
 
     def resolve
       'pong'
