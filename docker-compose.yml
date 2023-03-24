@@ -1,0 +1,40 @@
+version: '3'
+services:
+  db:
+    image: postgres:14.5-alpine
+    ports:
+      - '5432:5432'
+    volumes:
+      - .postgres:/var/lib/postgresql/data
+      # - ./db/init:/docker-entrypoint-initdb.d
+      # - ./db/scripts:/scripts
+    environment:
+      POSTGRES_PASSWORD: secret
+    tty: true
+    stdin_open: true
+  app:
+    build:
+      context: ./api
+      dockerfile: containers/development/Dockerfile
+    command: /bin/bash -c "rm -f /app/tmp/pids/server.pid; bundle install -j3; bin/rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./api:/app
+    environment:
+      CORS_ALLOWED_ORIGINS: '.*'
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+  web:
+    build:
+      context: ./web
+      dockerfile: containers/development/Dockerfile
+    command: /bin/sh -c "yarn install && yarn dev"
+    ports:
+      - '8080:8080'
+      - '24678:24678'
+    volumes:
+      - ./web:/web
+      - /web/node_modules
