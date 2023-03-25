@@ -50,7 +50,7 @@ export type MutationSigninUserArgs = {
 
 export type Query = {
   __typename?: 'Query'
-  /** The currently logged in user */
+  /** CurrentUser 取得 */
   currentUser: User
   /** Userの一覧取得 */
   ping: Scalars['String']
@@ -225,7 +225,6 @@ export const CurrentUserDocument = gql`
 export function useCurrentUserQuery(
   options: Omit<Urql.UseQueryArgs<never, CurrentUserQueryVariables>, 'query'> = {}
 ) {
-  // @ts-ignore: TS2345
   return Urql.useQuery<CurrentUserQuery>({ query: CurrentUserDocument, ...options })
 }
 export const PingDocument = gql`
@@ -237,6 +236,5 @@ export const PingDocument = gql`
 export function usePingQuery(
   options: Omit<Urql.UseQueryArgs<never, PingQueryVariables>, 'query'> = {}
 ) {
-  // @ts-ignore: TS2345
   return Urql.useQuery<PingQuery>({ query: PingDocument, ...options })
 }
