@@ -9,12 +9,6 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
     field :ping, resolver: Queries::Ping
-
-    field :current_user, Types::UserType, null: false, description: 'The currently logged in user'
-    def current_user
-      raise GraphQL::ExecutionError, 'login required!!' unless context[:current_user]
-
-      context[:current_user]
-    end
+    field :current_user, resolver: Queries::CurrentUser
   end
 end
