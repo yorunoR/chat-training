@@ -1,7 +1,10 @@
 <template>
   <main style="max-width: 768px; margin: auto">
     <h2>History</h2>
-    <section v-if="data" class="text-left mt-6">
+    <section v-if="error">
+      {{ error }}
+    </section>
+    <section v-else-if="data" class="text-left mt-6">
       <div
         v-for="answerHistory in data.currentUser.answerHistories"
         class="border-solid border-1 border-700 p-3 mt-4"
@@ -28,7 +31,7 @@
 <script setup lang="ts">
 import { useCurrentUserQuery } from '@/auto_generated/graphql'
 
-const { data } = useCurrentUserQuery({
+const { data, error } = useCurrentUserQuery({
   context: { additionalTypenames: ['AnswerHistory'] }
 })
 </script>
