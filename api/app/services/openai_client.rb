@@ -21,4 +21,25 @@ class OpenaiClient
 
     response.dig('choices', 0, 'message', 'content')
   end
+
+  def model_list
+    models = @client.models.list
+    models['data'].map do |model|
+      p model
+      {
+        id: model['id'],
+        owned_by: model['owned_by'],
+        root: model['root']
+      }
+    end
+  end
+
+  def embeddings(input)
+    @client.embeddings(
+      parameters: {
+        model: @model,
+        input:
+      }
+    )
+  end
 end
